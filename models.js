@@ -6,7 +6,11 @@ const db = new Sequelize({
 })
 
 const Passenger = db.define('passenger', {
-    PassengerId: Sequelize.INTEGER,
+    // timestamps: false,
+    PassengerId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true
+    },
     Survived: Sequelize.INTEGER,
     Pclass: Sequelize.INTEGER,
     Name: Sequelize.STRING,
@@ -21,6 +25,6 @@ const Passenger = db.define('passenger', {
 })
 
 module.exports = {
-    sequelize,
+    db,
     Passenger
 }
