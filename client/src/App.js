@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
 import { getAllPassengers } from './services/api.js';
 import './App.css';
+import { Route, Switch } from 'react-router-dom'
 import JqxGrid, { jqx } from './assets/jqwidgets-react/react_jqxgrid';
+import Header from './components/Header'
+import AllPassengers from './components/AllPassengers'
+import AddPassenger from './components/AddPassenger'
+
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      data: []
+      data: [],
+      newPassengerId: "",
+      Survived: "",
+      Pclass: "",
+      Name: "",
+      Sex: "",
+      Age: "",
+      SibSp: "",
+      Parch: "",
+      Ticket: "",
+      Fare: "",
+      Cabin: "",
+      Embarked: ""
     }
   }
 
@@ -70,14 +87,41 @@ class App extends Component {
                 { text: 'Cabin', datafield: 'Cabin' },
                 { text: 'Embarked', datafield: 'Embarked' }
             ];  
+        const { newPassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked } = this.state
+
         return (
           <div className="App">
+            <Header/>
+            <Switch>
+              <Route exact path="/" render={() => 
+              <AddPassenger 
+              onFormChange={this.onFormChange}
+              PassengerId={newPassengerId}
+              Survived={Survived}
+              Pclass={Pclass}
+              Name={Name}
+              Sex={Sex}
+              Age={Age}
+              SibSp={SibSp}
+              Parch={Parch}
+              Ticket={Ticket}
+              Fare={Fare}
+              Cabin={Cabin}
+              Embarked={Embarked}
+              />}/>
+              <Route path="/passengers" render={() =>
+              <AllPassengers
+              passengers={this.state.data}
+              />}/>
+              {/* <Route path="/charts" render={() => 
+               }/> */}
+            </Switch>
             <JqxGrid 
-                width={1000} source={dataAdapter} columns={columns}
-                pageable={true} autoheight={true} sortable={true}
-                altrows={true} enabletooltips={true}
-                selectionmode={'multiplecellsadvanced'} 
-            />
+               width={1000} source={dataAdapter} columns={columns}
+               pageable={true} autoheight={true} sortable={true}
+               altrows={true} enabletooltips={true}
+               selectionmode={'multiplecellsadvanced'} 
+              />
             </div>
         );
     }
