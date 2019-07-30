@@ -28,6 +28,11 @@ class App extends Component {
     }
   }
 
+  onFormChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({[name]: value})
+  }
+
   componentDidMount = async () => {
     try {
       let data = await getAllPassengers()
@@ -94,34 +99,38 @@ class App extends Component {
             <Header/>
             <Switch>
               <Route exact path="/" render={() => 
-              <AddPassenger 
-              onFormChange={this.onFormChange}
-              PassengerId={newPassengerId}
-              Survived={Survived}
-              Pclass={Pclass}
-              Name={Name}
-              Sex={Sex}
-              Age={Age}
-              SibSp={SibSp}
-              Parch={Parch}
-              Ticket={Ticket}
-              Fare={Fare}
-              Cabin={Cabin}
-              Embarked={Embarked}
-              />}/>
+              <div>
+                <JqxGrid 
+                width={1000} source={dataAdapter} columns={columns}
+                pageable={true} autoheight={true} sortable={true}
+                altrows={true} enabletooltips={true}
+                selectionmode={'multiplecellsadvanced'} 
+             />
+             <p>No data? <input type="button" value="Refresh" onClick={() => window.location.reload()}/></p>
+             </div>
+             }/>
               <Route path="/passengers" render={() =>
               <AllPassengers
               passengers={this.state.data}
               />}/>
-              {/* <Route path="/charts" render={() => 
-               }/> */}
+              <Route path="/charts" render={() => 
+               <AddPassenger 
+               onFormChange={this.onFormChange}
+               PassengerId={newPassengerId}
+               Survived={Survived}
+               Pclass={Pclass}
+               Name={Name}
+               Sex={Sex}
+               Age={Age}
+               SibSp={SibSp}
+               Parch={Parch}
+               Ticket={Ticket}
+               Fare={Fare}
+               Cabin={Cabin}
+               Embarked={Embarked}
+               />}/>
             </Switch>
-            <JqxGrid 
-               width={1000} source={dataAdapter} columns={columns}
-               pageable={true} autoheight={true} sortable={true}
-               altrows={true} enabletooltips={true}
-               selectionmode={'multiplecellsadvanced'} 
-              />
+            
             </div>
         );
     }
