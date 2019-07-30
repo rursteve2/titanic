@@ -1,8 +1,12 @@
 import React from 'react'
 
-function OnePassenger() {
+function OnePassenger(props) {
+    console.log(props)
     return(
-        <h1>This is one passenger.</h1>
+        <div>
+            <h1>{props.passenger.Name}</h1>
+
+        </div>
     )
 }
 
