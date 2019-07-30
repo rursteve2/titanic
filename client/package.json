@@ -1,12 +1,26 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
+  "_from": "https://github.com/jqwidgets/client/tarball/master",
+  "_id": "client@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-TzCrV6rvvYS5En18r6qrM2T7Rz24DQomJCLmQ2j/V08534YPijH5CjTAKJcDI8vNHM+HgyNS3YFxDVd0mHWSqg==",
+  "_location": "/client/client",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "remote",
+    "raw": "client@https://github.com/jqwidgets/client/tarball/master",
+    "name": "client",
+    "escapedName": "client",
+    "rawSpec": "https://github.com/jqwidgets/client/tarball/master",
+    "saveSpec": "https://github.com/jqwidgets/client/tarball/master",
+    "fetchSpec": "https://github.com/jqwidgets/client/tarball/master"
+  },
+  "_requiredBy": [],
+  "_resolved": "https://github.com/jqwidgets/client/tarball/master",
+  "_shasum": "7d2a1b35e0af075c74da15c045aaddabd7a70e35",
+  "_spec": "client@https://github.com/jqwidgets/client/tarball/master",
+  "_where": "/usr/local/lib/node_modules/client",
+  "bundleDependencies": false,
   "dependencies": {
-    "babel-core": "6.21.0",
-    "babel-loader": "6.2.10",
-    "babel-preset-es2015": "6.18.0",
-    "babel-preset-react": "6.16.0",
     "highcharts": "^7.1.2",
     "jqwidgets-framework": "^8.1.4",
     "react": "^16.8.6",
@@ -14,18 +28,19 @@
     "react-paginate": "^6.3.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "webpack": "1.14.0"
+    "react-scripts": "3.0.1"
   },
+  "deprecated": false,
+  "description": "Please refer to its documentation:   - [Getting Started](https://github.com/jqwidgets/client/blob/master/README.md#getting-started)    - [jQWidgets React Documentation](http://www.jqwidgets.com/reactjs-components-documentation/)",
+  "name": "client",
+  "private": true,
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
+  "version": "1.0.0",
   "browserslist": {
     "production": [
       ">0.2%",
