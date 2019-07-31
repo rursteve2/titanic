@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllPassengers } from './services/api.js';
+import { getAllPassengers, createPassenger } from './services/api.js';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import JqxGrid, { jqx } from './assets/jqwidgets-react/react_jqxgrid';
@@ -14,17 +14,18 @@ class App extends Component {
     this.state = {
       data: [],
       newPassengerId: "",
-      Survived: "",
+      Survived: "0",
       Pclass: "",
       Name: "",
-      Sex: "",
+      Sex: "male",
       Age: "",
       SibSp: "",
       Parch: "",
       Ticket: "",
       Fare: "",
       Cabin: "",
-      Embarked: ""
+      Embarked: "",
+      isCreated: false
     }
   }
 
@@ -33,11 +34,35 @@ class App extends Component {
     this.setState({[name]: value})
   }
 
+  submitPassenger = async (event) => {
+    event.preventDefault()
+    const newPassenger = {"newPassenger": {
+      "PassengerId": this.state.newPassengerId,
+      "Survived": this.state.Survived,
+      "Pclass": this.state.Pclass,
+      "Name": this.state.Name,
+      "Sex": this.state.Sex,
+      "Age": this.state.Age,
+      "SibSp": this.state.SibSp,
+      "Parch": this.state.Parch,
+      "Ticket": this.state.Ticket,
+      "Fare": this.state.Fare,
+      "Cabin": this.state.Cabin,
+      "Embarked": this.state.Embarked
+    }}
+    await createPassenger(newPassenger)
+    this.setState({
+      isCreated: true
+    })
+
+  }
+
   componentDidMount = async () => {
     try {
       let data = await getAllPassengers()
       this.setState({
-        data: data.data.passengers
+        data: data.data.passengers,
+        newPassengerId: data.data.passengers.length + 1
       })
     } catch(e) {
       console.log(e)
@@ -92,7 +117,7 @@ class App extends Component {
                 { text: 'Cabin', datafield: 'Cabin' },
                 { text: 'Embarked', datafield: 'Embarked' }
             ];  
-        const { newPassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked } = this.state
+        const { newPassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked, isCreated } = this.state
 
         return (
           <div className="App">
@@ -128,6 +153,8 @@ class App extends Component {
                Fare={Fare}
                Cabin={Cabin}
                Embarked={Embarked}
+               isCreated={isCreated}
+               submitPassenger={this.submitPassenger}
                />}/>
             </Switch>
             
