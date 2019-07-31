@@ -21,7 +21,6 @@ class Charts extends Component {
     }
 
     parseData = () => {
-        console.log(Object.entries(this.props.data[0])[4][1])
         let survived = 0;
         let dead = 0;
         let male = 0;
