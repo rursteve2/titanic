@@ -6,6 +6,7 @@ import JqxGrid, { jqx } from './assets/jqwidgets-react/react_jqxgrid';
 import Header from './components/Header'
 import AllPassengers from './components/AllPassengers'
 import AddPassenger from './components/AddPassenger'
+import Charts from './components/Charts'
 
 
 class App extends Component {
@@ -129,7 +130,7 @@ class App extends Component {
                 { text: 'Cabin', datafield: 'Cabin' },
                 { text: 'Embarked', datafield: 'Embarked' }
             ];  
-        const { newPassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked, isCreated } = this.state
+        const { data, newPassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked, isCreated } = this.state
 
         return (
           <div className="App">
@@ -137,6 +138,10 @@ class App extends Component {
             <Switch>
               <Route exact path="/" render={() => 
               <div>
+                <Charts 
+                data={data} 
+                loadData={this.loadData}
+                />
                 <JqxGrid 
                 width={1000} source={dataAdapter} columns={columns}
                 pageable={true} autoheight={true} sortable={true}
