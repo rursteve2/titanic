@@ -27,6 +27,7 @@ class AllPassengers extends Component {
                 key={index} 
                 id={index} 
                 loadData={this.props.loadData}
+                editModal={this.props.editModal}
                 />))}
                 <ReactPaginate/>
             </div>

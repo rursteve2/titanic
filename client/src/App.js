@@ -26,7 +26,8 @@ class App extends Component {
       Fare: "",
       Cabin: "",
       Embarked: "",
-      isCreated: false
+      isCreated: false,
+      modalDisplay: "none"
     }
   }
 
@@ -81,6 +82,12 @@ class App extends Component {
       console.log(e)
     }
   }
+
+  editModal = () => {
+    let modal = document.querySelector(".editmodal");
+    modal.style.display = "block"
+  }
+
     render() {
         const source =
             {
@@ -156,6 +163,7 @@ class App extends Component {
               passengers={this.state.data}
               deletePassenger={this.deletePassenger}
               loadData={this.loadData}
+              editModal={this.editModal}
               />}/>
               <Route path="/charts" render={() => 
                <AddPassenger 
