@@ -34,8 +34,16 @@ class App extends Component {
     this.setState({[name]: value})
   }
 
-  submitPassenger = async (event) => {
-    event.preventDefault()
+  deletePassenger = async (id)=>{
+    const refreshPass = this.state.data
+    refreshPass.splice(id,1)
+    await this.setState({
+      data: refreshPass
+    })
+  }
+
+  submitPassenger = async (e) => {
+    e.preventDefault()
     const newPassenger = {"newPassenger": {
       "PassengerId": this.state.newPassengerId,
       "Survived": this.state.Survived,
@@ -57,7 +65,11 @@ class App extends Component {
 
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.loadData()
+  }
+
+  loadData = async () => {
     try {
       let data = await getAllPassengers()
       this.setState({
@@ -137,6 +149,8 @@ class App extends Component {
               <Route path="/passengers" render={() =>
               <AllPassengers
               passengers={this.state.data}
+              deletePassenger={this.deletePassenger}
+              loadData={this.loadData}
               />}/>
               <Route path="/charts" render={() => 
                <AddPassenger 

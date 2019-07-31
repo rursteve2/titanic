@@ -20,7 +20,14 @@ class AllPassengers extends Component {
         return(
             <div>
                 <h1>This is All passengers.</h1>
-                {this.props.passengers.map((passenger, index) => (<OnePassenger passenger={passenger} key={index}/>))}
+                {this.props.passengers.map((passenger, index) => (
+                <OnePassenger 
+                deletePassenger={this.props.deletePassenger} 
+                passenger={passenger} 
+                key={index} 
+                id={index} 
+                loadData={this.props.loadData}
+                />))}
                 <ReactPaginate/>
             </div>
         )
