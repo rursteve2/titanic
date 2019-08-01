@@ -18,7 +18,7 @@ class OnePassenger extends Component {
             <p>{this.props.passenger.Name}</p>
             <p>{this.props.passenger.PassengerId}</p>
             <button id={this.props.index} onClick={(e) => this.deletePass(e, this.props.passenger.PassengerId)}>Delete</button>
-            <button onClick={() => this.props.editModal()}>Edit</button>
+            <button onClick={() => this.props.editModal(this.props.passenger.PassengerId)}>Edit</button>
 
         </div>
     )

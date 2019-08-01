@@ -33,3 +33,22 @@ export const createPassenger = async (data) => {
         console.log(e)
     }
 }
+
+export const getOnePassenger = async(id) => {
+    try {
+        const resp = await api.get(`/passengers/${id}`)
+        return resp
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+export const editPassenger = async (id, data) => {
+    try {
+        const resp = await api.put(`/passengers/${id}`, data)
+        console.log(resp)
+        return resp
+    } catch(e) {
+        console.log(e)
+    }
+}

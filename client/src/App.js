@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllPassengers, createPassenger } from './services/api.js';
+import { getAllPassengers, createPassenger, editPassenger, getOnePassenger } from './services/api.js';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
 import JqxGrid, { jqx } from './assets/jqwidgets-react/react_jqxgrid';
@@ -7,6 +7,8 @@ import Header from './components/Header'
 import AllPassengers from './components/AllPassengers'
 import AddPassenger from './components/AddPassenger'
 import Charts from './components/Charts'
+import Modal from 'react-modal'
+Modal.setAppElement('.editmodal')
 
 
 class App extends Component {
@@ -27,7 +29,9 @@ class App extends Component {
       Cabin: "",
       Embarked: "",
       isCreated: false,
-      modalDisplay: "none"
+      modalDisplay: false,
+      editPassengerId: "",
+      selectedPage: 0
     }
   }
 
@@ -83,10 +87,51 @@ class App extends Component {
     }
   }
 
-  editModal = () => {
+  editModal = async (id) => {
     let modal = document.querySelector(".editmodal");
     modal.style.display = "block"
+    let passengerData = await getOnePassenger(id)
+    let passengerDataSpec = passengerData.data.onePassenger[0]
+    console.log(passengerDataSpec)
+    this.setState({
+      editPassengerId: id,
+      modalDisplay: true,
+      Survived: passengerDataSpec.Survived,
+      Pclass: passengerDataSpec.Pclass,
+      Name: passengerDataSpec.Name,
+      Sex: passengerDataSpec.Sex,
+      Age: passengerDataSpec.Age,
+      SibSp: passengerDataSpec.SibSp,
+      Parch: passengerDataSpec.Parch,
+      Ticket: passengerDataSpec.Ticket,
+      Fare: passengerDataSpec.Fare,
+      Cabin: passengerDataSpec.Cabin,
+      Embarked: passengerDataSpec.Embarked
+    })
   }
+  closeEditModal = () => {
+    let modal = document.querySelector(".editmodal");
+    modal.style.display = "none"
+    this.setState({
+      editPassengerId: "",
+      modalDisplay: false,
+      Survived: "0",
+      Sex: "male"
+    })
+  }
+
+  submitEditModal = async (id, data) => {
+    alert("Success!")
+    await editPassenger(id, data)
+  }
+
+  handlePageClicked = data => {
+    let selected = data.selected;
+    this.setState({
+      selectedPage: selected
+    })
+    console.log(selected)
+  };
 
     render() {
         const source =
@@ -138,10 +183,59 @@ class App extends Component {
                 { text: 'Embarked', datafield: 'Embarked' }
             ];  
         const { data, newPassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked, isCreated } = this.state
-
+        const editPassengerData = {
+          "Survived": this.state.Survived,
+          "Pclass": this.state.Pclass,
+          "Name": this.state.Name,
+          "Sex": this.state.Sex,
+          "Age": this.state.Age,
+          "SibSp": this.state.SibSp,
+          "Parch": this.state.Parch,
+          "Ticket": this.state.Ticket,
+          "Fare": this.state.Fare,
+          "Cabin": this.state.Cabin,
+          "Embarked": this.state.Embarked
+        }
+        
         return (
           <div className="App">
             <Header/>
+            <Modal 
+            isOpen={this.state.modalDisplay}
+            >
+              <form onSubmit={() => this.submitEditModal(this.state.editPassengerId, editPassengerData)}>
+                <p>Name</p>
+                <input type="text" name="Name" value={Name} placeholder="Name" onChange={this.onFormChange} />
+                <p>Survived?</p>
+                <select name="Survived" value={Survived} onChange={this.onFormChange}>
+                    <option value="0" defaultValue>No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <p>Pclass</p>
+                <input type="text" name="Pclass" value={Pclass} placeholder="Pclass" onChange={this.onFormChange}/>
+                <p>Sex</p>
+                <select name="Sex" value={Sex} onChange={this.onFormChange}>
+                    <option value="male" defaultValue>Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <p>Age</p>
+                <input type="number" name="Age" value={Age} placeholder="Age" onChange={this.onFormChange}/>
+                <p>SibSp</p>
+                <input type="number" name="SibSp" value={SibSp} placeholder="SibSp" onChange={this.onFormChange}/>
+                <p>Parch</p>
+                <input type="number" name="Parch" value={Parch} placeholder="Parch" onChange={this.onFormChange}/>
+                <p>Ticket</p>
+                <input type="text" name="Ticket" value={Ticket} placeholder="Ticket" onChange={this.onFormChange}/>
+                <p>Fare</p>
+                <input type="text" name="Fare" value={Fare} placeholder="Fare" onChange={this.onFormChange}/>
+                <p>Cabin</p>
+                <input type="text" name="Cabin" value={Cabin} placeholder="Cabin" onChange={this.onFormChange}/>
+                <p>Embarked</p>
+                <input type="text" name="Embarked" value={Embarked} placeholder="Embarked" onChange={this.onFormChange}/>
+                <input type="submit" />
+            </form>
+              <button onClick={() => this.closeEditModal()}>Close without changes</button>
+            </Modal>
             <Switch>
               <Route exact path="/" render={() => 
               <div>
@@ -164,6 +258,7 @@ class App extends Component {
               deletePassenger={this.deletePassenger}
               loadData={this.loadData}
               editModal={this.editModal}
+              handlePageClicked={this.handlePageClicked}
               />}/>
               <Route path="/charts" render={() => 
                <AddPassenger 
