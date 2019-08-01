@@ -19,7 +19,7 @@ function AddPassenger(props) {
                     <option value="male" defaultValue>Male</option>
                     <option value="female">Female</option>
                 </select>
-                <p>Sex</p>
+                <p>Age</p>
                 <input type="number" name="Age" value={Age} placeholder="Age" onChange={onFormChange} />
                 <p>SibSp</p>
                 <input type="number" name="SibSp" value={SibSp} placeholder="SibSp" onChange={onFormChange} />

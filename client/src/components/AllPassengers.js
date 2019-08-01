@@ -54,17 +54,22 @@ class AllPassengers extends Component {
     render() {
         return(
             <div>
-                <h1>This is All passengers.</h1>
-                <button onClick={this.renderPages}>Load Data</button>
-                {this.state.selectedData.map((passenger, index) => (
-                <OnePassenger 
-                deletePassenger={this.props.deletePassenger} 
-                passenger={passenger} 
-                key={index} 
-                id={index} 
-                loadData={this.props.loadData}
-                editModal={this.props.editModal}
-                />))}
+                <div>
+                    <h1>Passengers</h1>
+                    <p>No data?</p>
+                    <button onClick={this.renderPages}>Load Data</button>
+                </div>
+                <div className="allpassengers">
+                    {this.state.selectedData.map((passenger, index) => (
+                    <OnePassenger 
+                    deletePassenger={this.props.deletePassenger} 
+                    passenger={passenger} 
+                    key={index} 
+                    id={index} 
+                    loadData={this.props.loadData}
+                    editModal={this.props.editModal}
+                    />))}
+                </div>
                 <div className="pagebuttons">
                     <button onClick={this.backOnePage}>Previous 10</button>
                     <button onClick={this.nextPage}>Next 10</button>

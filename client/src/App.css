@@ -14,8 +14,40 @@ html {
   }
 
   .onepassenger {
-      border: 1px solid black;
+      border: 1px solid white;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-radius: 15px;
+      align-content: center;
+      width: 500px;
+      height: 200px;
   }
+
+  .allpassengers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
+  }
+
+  button {
+      background-color: white;
+      color: black;
+      margin-left: 5px;
+      margin-right: 5px;
+      border-radius: 10px;
+  }
+
+  select, input {
+      background-color: white;
+      color: black;
+      margin-left: 5px;
+      margin-right: 5px;
+  }
+
+
+
   .charts {
       margin-top: 30px;
       margin-bottom: 30px;
@@ -39,4 +71,8 @@ html {
       background-color: black;
       color: white;
       text-align: center;
+  }
+
+  .jqx-reset {
+      margin: 0 auto;
   }

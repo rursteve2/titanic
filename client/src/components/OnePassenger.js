@@ -16,6 +16,7 @@ class OnePassenger extends Component {
         const { passenger } = this.props
     return(
         <div className="onepassenger">
+            <p>Passenger ID: {passenger.PassengerId}</p>
             <p>{passenger.Name}</p>
             <p>{passenger.Survived === 0 ? "Dead" : "Survived"}</p>
             <p>{passenger.Sex.charAt(0).toUpperCase() + passenger.Sex.slice(1)}</p>
