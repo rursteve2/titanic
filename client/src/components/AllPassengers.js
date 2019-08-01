@@ -1,26 +1,62 @@
 import React, { Component } from 'react'
-import ReactPaginate from 'react-paginate'
+// import ReactPaginate from 'react-paginate'
 import OnePassenger from './OnePassenger'
+import PropTypes from 'prop-types';
+
+// import Pagination from 'react-paginating'
+let forwardPage = 10
+let backPage = 0
 
 
 class AllPassengers extends Component {  
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         data: []
-    //     }
-    // }  
+    static propTypes = {
+        url: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        perPage: PropTypes.number.isRequired,
+      };
+    constructor() {
+        super() 
+        this.state = {
+            allData: [],
+            selectedData: [],
+            limit: 10,
+            pageCount: 8,
+            currentPage: 1
+        }
+    }
+    nextPage = () => {
+        if (forwardPage < this.props.passengers.length ) {
+        forwardPage += 10
+        backPage += 10
+        this.setState({
+            selectedData: this.props.passengers.slice(backPage, forwardPage)
+        })
+    }
+      };
 
-    // componentDidMount = async () => {
-    //         await this.setState({
-    //             data: this.props.passengers
-    //     })
-    // }
+    backOnePage = () => {
+        if (backPage > 0 || forwardPage > 10) {
+        forwardPage -= 10
+        backPage -= 10
+        this.setState({
+            selectedData: this.props.passengers.slice(backPage, forwardPage)
+        })
+    }
+    }
+
+    renderPages = () => {
+        this.setState({
+            allData: this.props.passengers,
+            selectedData: this.props.passengers.slice(backPage, forwardPage)
+        })
+    }
+
     render() {
         return(
             <div>
                 <h1>This is All passengers.</h1>
-                {this.props.passengers.map((passenger, index) => (
+                <button onClick={this.renderPages}>Load Data</button>
+                {this.state.selectedData.map((passenger, index) => (
                 <OnePassenger 
                 deletePassenger={this.props.deletePassenger} 
                 passenger={passenger} 
@@ -29,19 +65,10 @@ class AllPassengers extends Component {
                 loadData={this.props.loadData}
                 editModal={this.props.editModal}
                 />))}
-                <ReactPaginate
-                  previousLabel={'previous'}
-                  nextLabel={'next'}
-                  breakLabel={'...'}
-                  breakClassName={'break-me'}
-                  pageCount={10}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={5}
-                  onPageChange={this.props.handlePageClicked}
-                  containerClassName={'pagination'}
-                  subContainerClassName={'pages pagination'}
-                  activeClassName={'active'}
-                />
+                <div className="pagebuttons">
+                    <button onClick={this.backOnePage}>Previous 10</button>
+                    <button onClick={this.nextPage}>Next 10</button>
+                </div>
             </div>
         )
     }

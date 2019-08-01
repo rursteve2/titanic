@@ -13,10 +13,12 @@ class OnePassenger extends Component {
          console.log("deleted!")
     }
     render() {
+        const { passenger } = this.props
     return(
         <div>
-            <p>{this.props.passenger.Name}</p>
-            <p>{this.props.passenger.PassengerId}</p>
+            <p>{passenger.Name}</p>
+            <p>{passenger.Survived === 0 ? "Dead" : "Survived"}</p>
+            <p>{passenger.Sex.charAt(0).toUpperCase() + passenger.Sex.slice(1)}</p>
             <button id={this.props.index} onClick={(e) => this.deletePass(e, this.props.passenger.PassengerId)}>Delete</button>
             <button onClick={() => this.props.editModal(this.props.passenger.PassengerId)}>Edit</button>
 

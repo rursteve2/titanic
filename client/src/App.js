@@ -31,7 +31,8 @@ class App extends Component {
       isCreated: false,
       modalDisplay: false,
       editPassengerId: "",
-      selectedPage: 1
+      selectedPage: 1,
+      pageCount: 0
     }
   }
 
@@ -80,7 +81,8 @@ class App extends Component {
       let data = await getAllPassengers()
       this.setState({
         data: data.data.passengers,
-        newPassengerId: data.data.passengers.length + 1
+        newPassengerId: data.data.passengers.length + 1,
+        pageCount: Math.ceil(data.data.passengers.length / 10)
       })
     } catch(e) {
       console.log(e)
@@ -259,6 +261,7 @@ class App extends Component {
               loadData={this.loadData}
               editModal={this.editModal}
               handlePageClicked={this.handlePageClicked}
+              pageCount={this.state.pageCount}
               />}/>
               <Route path="/charts" render={() => 
                <AddPassenger 
