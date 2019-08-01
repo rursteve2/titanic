@@ -119,8 +119,12 @@ class Charts extends Component {
         return (
             <div>
                 <h1>Charts</h1>
-                <HighchartsReact highcharts={Highcharts} options={pieOptions} />
-                <HighchartsReact highcharts={Highcharts} options={barOptions} />
+                <div className="charts">
+                    <HighchartsReact highcharts={Highcharts} options={pieOptions} />
+                </div>
+                <div className="charts">
+                    <HighchartsReact highcharts={Highcharts} options={barOptions} />
+                </div>
 
             </div>
         );

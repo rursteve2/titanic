@@ -203,6 +203,7 @@ class App extends Component {
           <div className="App">
             <Header/>
             <Modal 
+            className="modal"
             isOpen={this.state.modalDisplay}
             >
               <form onSubmit={() => this.submitEditModal(this.state.editPassengerId, editPassengerData)}>

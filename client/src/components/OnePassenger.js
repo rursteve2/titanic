@@ -15,7 +15,7 @@ class OnePassenger extends Component {
     render() {
         const { passenger } = this.props
     return(
-        <div>
+        <div className="onepassenger">
             <p>{passenger.Name}</p>
             <p>{passenger.Survived === 0 ? "Dead" : "Survived"}</p>
             <p>{passenger.Sex.charAt(0).toUpperCase() + passenger.Sex.slice(1)}</p>
