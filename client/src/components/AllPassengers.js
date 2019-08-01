@@ -29,7 +29,19 @@ class AllPassengers extends Component {
                 loadData={this.props.loadData}
                 editModal={this.props.editModal}
                 />))}
-                <ReactPaginate/>
+                <ReactPaginate
+                  previousLabel={'previous'}
+                  nextLabel={'next'}
+                  breakLabel={'...'}
+                  breakClassName={'break-me'}
+                  pageCount={10}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={this.props.handlePageClicked}
+                  containerClassName={'pagination'}
+                  subContainerClassName={'pages pagination'}
+                  activeClassName={'active'}
+                />
             </div>
         )
     }

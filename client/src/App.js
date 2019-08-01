@@ -31,7 +31,7 @@ class App extends Component {
       isCreated: false,
       modalDisplay: false,
       editPassengerId: "",
-      selectedPage: 0
+      selectedPage: 1
     }
   }
 
@@ -126,7 +126,7 @@ class App extends Component {
   }
 
   handlePageClicked = data => {
-    let selected = data.selected;
+    let selected = data.selected + 1
     this.setState({
       selectedPage: selected
     })
