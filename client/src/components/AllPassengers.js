@@ -44,6 +44,10 @@ class AllPassengers extends Component {
     }
     }
 
+    componentDidMount = () => {
+        this.renderPages()
+    }
+
     renderPages = () => {
         this.setState({
             allData: this.props.passengers,
