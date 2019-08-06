@@ -45,7 +45,7 @@ class AllPassengers extends Component {
     }
 
     componentDidMount = () => {
-        this.renderPages()
+        this.renderPages();
     }
 
     renderPages = () => {
@@ -72,6 +72,7 @@ class AllPassengers extends Component {
                     id={index} 
                     loadData={this.props.loadData}
                     editModal={this.props.editModal}
+                    renderPages={this.renderPages}
                     />))}
                 </div>
                 <div className="pagebuttons">

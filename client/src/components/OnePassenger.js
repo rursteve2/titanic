@@ -8,9 +8,11 @@ class OnePassenger extends Component {
         e.preventDefault()
         console.log(id)
         await axios.delete(`http://localhost:4567/passengers/${id}`);
-        // this.props.deletePassenger(id)
-        this.props.loadData()
+        await this.props.deletePassenger(id)
+        await this.props.loadData()
          console.log("deleted!")
+         await this.props.renderPages()
+
     }
     render() {
         const { passenger } = this.props

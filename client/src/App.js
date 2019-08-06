@@ -47,6 +47,7 @@ class App extends Component {
     await this.setState({
       data: refreshPass
     })
+    alert("Passenger Deleted!")
   }
 
   submitPassenger = async (e) => {
@@ -69,6 +70,7 @@ class App extends Component {
     this.setState({
       isCreated: true
     })
+    alert("Passenger Created!")
 
   }
 
