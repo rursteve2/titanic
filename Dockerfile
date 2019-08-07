@@ -16,17 +16,31 @@
 # CMD ["npm", "start"]
 
 
-FROM node:10
+# FROM node:10
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY ./package.json .
-COPY ./package-lock.json .
+# COPY ./package.json .
+# COPY ./package-lock.json .
+
+# RUN npm install
+
+# COPY . .
+
+# EXPOSE 3000
+
+# CMD npm start
+
+FROM node:8.7.0-alpine
+
+RUN mkdir -p /srv/app/server
+WORKDIR /srv/app/server
+
+COPY package.json /srv/app/server
+COPY package-lock.json /srv/app/server
 
 RUN npm install
 
-COPY . .
+COPY . /srv/app/server
 
-EXPOSE 3000
-
-CMD npm start
+CMD [ "npm", "run", "start"]

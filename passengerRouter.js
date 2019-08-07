@@ -23,11 +23,7 @@ passengerRouter.post('/', async (request, response) => {
 passengerRouter.get('/:id', async (request, response) => {
     try {
         const id = request.params.id
-        const onePassenger = await Passenger.findAll({
-            where: {
-                PassengerId: id
-            }
-        })
+        const onePassenger = await Passenger.findByPk(id)
         response.json({onePassenger})
     } catch (e) {
         console.log(e)
