@@ -23,9 +23,11 @@
   "dependencies": {
     "axios": "^0.19.0",
     "highcharts": "^7.1.2",
+    "highcharts-react-official": "^2.2.2",
     "jqwidgets-framework": "^8.1.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-modal": "^3.9.1",
     "react-paginate": "^6.3.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",

@@ -54,3 +54,18 @@ services:
     links:
       - server
     command: npm run start
+
+  db:
+    image: "postgres:latest"
+    restart: always
+    container_name: "titanic_db"
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: titanic_db
+    volumes:
+      - ./seed.sql:/docker-entrypoint-initdb.d/seed.sql
+volumes:
+  my_dbdata:
