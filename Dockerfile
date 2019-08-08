@@ -43,4 +43,6 @@ RUN npm install
 
 COPY . /srv/app/server
 
+ADD seed.sql /docker-entrypoint-initdb.d/
+
 CMD [ "npm", "run", "start"]
