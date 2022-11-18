@@ -31,7 +31,7 @@
     "react-paginate": "^6.3.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "5.0.1"
   },
   "deprecated": false,
   "description": "Please refer to its documentation:   - [Getting Started](https://github.com/jqwidgets/client/blob/master/README.md#getting-started)    - [jQWidgets React Documentation](http://www.jqwidgets.com/reactjs-components-documentation/)",
